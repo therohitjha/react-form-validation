@@ -49,6 +49,7 @@ function App() {
       setUser((prevData) => {
         return { ...prevData, [err]: `Input is not valid` };
       });
+      return false;
     } else {
       setUser((prevData) => {
         return {
@@ -56,15 +57,21 @@ function App() {
           [err]: "",
         };
       });
+      return true;
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    userValidation(nameRE, user.name, "nameErr");
-    userValidation(passRE, user.password, "passwordErr");
-    userValidation(emailRE, user.email, "emailErr");
-    userValidation(mobileRE, user.mobile, "mobileErr");
+
+    if (
+      userValidation(nameRE, user.name, "nameErr") &&
+      userValidation(passRE, user.password, "passwordErr") &&
+      userValidation(emailRE, user.email, "emailErr") &&
+      userValidation(mobileRE, user.mobile, "mobileErr")
+    ) {
+      alert("form submitted");
+    }
   };
   return (
     <div>
